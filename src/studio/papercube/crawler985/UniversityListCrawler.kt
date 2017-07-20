@@ -32,7 +32,5 @@ open class UniversityListCrawler(private val address:String){
     }
 }
 
-data class UniversityInfo(val name:String, val infoPageAddress:String, val index:Int)
-
 open class University985Crawler:UniversityListCrawler(indexPageOf985UrlString)
 open class University211Crawler:UniversityListCrawler(indexPageOf211UrlString)

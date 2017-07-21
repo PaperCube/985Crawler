@@ -34,7 +34,7 @@ fun writeToCSV(universityListCrawler: UniversityListCrawler, file: File) {
     PrintWriter(FileWriter(file).buffered()).use { out ->
         getAll(universityListCrawler, System.out).forEach { score ->
             score.data.forEach { specialtyName, (year, max, avg, min, batch) ->
-                out.println("${score.universityName}$year$specialtyName,$max,$avg,$min,$batch")
+                out.println("${score.universityName},$year$specialtyName,$max,$avg,$min,$batch")
             }
         }
     }

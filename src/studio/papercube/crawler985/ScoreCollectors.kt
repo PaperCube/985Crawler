@@ -73,7 +73,7 @@ object ScoreCollectors {
                 val specialtyName = it.key
                 val (year, max, avg, min, batch) = it.value
                 "${specialtyScore.universityName},$year,$specialtyName,$max,$avg,$min,$batch"
-            }.let { b.appendln(it) }
+            }.let { b.append(it) }
         }.toString()
     }
 }

@@ -25,7 +25,7 @@ open class UniversityListCrawler(private val address:String){
         return fetchedUrls
     }
 
-    fun fetchAllPagesIndexes():List<Int>{
+    fun fetchAllUniversityCodes():List<Int>{
         return fetchAllPagesAdresses().map {
             it.replace("http://gkcx.eol.cn/schoolhtm/schoolSpecailtyMark/(.*)/schoolSpecailtyMark.htm".toRegex(),"$1").toIntOrNull()
         }.filterNotNull()

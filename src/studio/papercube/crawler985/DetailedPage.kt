@@ -63,6 +63,9 @@ open class DetailedPage protected constructor() {
         }
     }
 
+    /**
+     * @param data 一个Map，键是专业名称，值是这个专业的分数
+     */
     class SpecialtiesScores(
             val universityName: String?,
             val head: List<String>,

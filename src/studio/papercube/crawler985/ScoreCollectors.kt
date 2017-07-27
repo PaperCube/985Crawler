@@ -1,6 +1,7 @@
 package studio.papercube.crawler985
 
 import studio.papercube.crawler985.DetailedPage.SpecialtiesScores
+import java.util.*
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -8,9 +9,11 @@ import java.util.function.Supplier
 import java.util.stream.Collectors.toList
 import java.util.stream.Stream
 
+private var threadCounter = 0
 private val resolveExecutor: ExecutorService = Executors.newFixedThreadPool(
-        Runtime.getRuntime().availableProcessors() * 80) {
-    Thread("ResolveExecutorService").apply {
+        Runtime.getRuntime().availableProcessors() * 80) { runnable->
+    Thread(runnable).apply {
+        name = "ResolveExecutorService-${++threadCounter}"
         isDaemon = true
     }
 } //W/C ratio, N(cpu) * (1+w/c)
@@ -65,11 +68,12 @@ object ScoreCollectors {
     @JvmStatic
     fun mapToCSV() = { specialtyScore: SpecialtiesScores ->
         StringBuilder().also { b: StringBuilder ->
-            specialtyScore.data.entries.joinToString {
+            specialtyScore.data.entries.joinToString("\n") {
+//                println("resolving")
                 val specialtyName = it.key
                 val (year, max, avg, min, batch) = it.value
                 "${specialtyScore.universityName},$year,$specialtyName,$max,$avg,$min,$batch"
-            }
+            }.let { b.appendln(it) }
         }.toString()
     }
 }

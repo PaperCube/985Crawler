@@ -3,7 +3,7 @@ package studio.papercube.crawler985
 import okhttp3.Request
 
 open class UniversityListCrawler(private val address:String){
-    fun fetchAllPagesAdresses():List<String>{
+    fun fetchAllPagesAddresses():List<String>{
         val responseString = Request.Builder()
                 .url(address)
                 .get()
@@ -26,7 +26,7 @@ open class UniversityListCrawler(private val address:String){
     }
 
     fun fetchAllUniversityCodes():List<Int>{
-        return fetchAllPagesAdresses().map {
+        return fetchAllPagesAddresses().map {
             it.replace("http://gkcx.eol.cn/schoolhtm/schoolSpecailtyMark/(.*)/schoolSpecailtyMark.htm".toRegex(),"$1").toIntOrNull()
         }.filterNotNull()
     }

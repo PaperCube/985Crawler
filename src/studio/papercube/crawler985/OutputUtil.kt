@@ -17,7 +17,10 @@ fun writeToCSV(universityListCrawler: UniversityListCrawler, file: File, encodin
             subjectType = EntityCodes.SubjectType.SCIENCE)
             .getAsStream()
             .map(ScoreCollectors.mapToCSV())
-            .forEachOrdered { writer.println(it) }
+            .forEach{
+                writer.println(it)
+            }
+    writer.close()
 }
 
 @Deprecated("Use Stream-styled instead", ReplaceWith("ScoreCollector().getAsStream()"))
